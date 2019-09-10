@@ -1,5 +1,8 @@
 package com.aki.service;
 
 public interface TimeService {
-    void sayHello();
+    /**
+     * 相关类详解
+     */
+    void timeClassTest();
 }
