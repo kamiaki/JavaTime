@@ -3,6 +3,7 @@ package com.aki.service.impl;
 import com.aki.service.TimeService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service(value = "timeServiceImpl")
@@ -15,6 +16,8 @@ public class TimeServiceImpl implements TimeService {
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(new StringBuffer("localDateTime: ").append(localDateTime));
 
+        LocalDate localDate = LocalDate.now();
+        System.out.println(new StringBuffer("localDate: ").append(localDate));
 
     }
 }
