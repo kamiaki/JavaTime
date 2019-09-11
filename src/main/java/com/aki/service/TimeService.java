@@ -61,4 +61,8 @@ public interface TimeService {
      */
     void formatTest();
 
+    /**
+     * 从某个时间获取
+     */
+    void fromTest();
 }
