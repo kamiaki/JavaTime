@@ -11,6 +11,6 @@ public class App {
 
     public static void main(String[] args) {
         TimeService timeService = (TimeService) SpringUtil.getSpringBean("timeServiceImpl");
-        timeService.timeClassTest();
+        timeService.isTest();
     }
 }
