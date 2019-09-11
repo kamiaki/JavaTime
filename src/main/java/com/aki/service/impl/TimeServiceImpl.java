@@ -63,6 +63,10 @@ public class TimeServiceImpl implements TimeService {
         LocalDateTime end = LocalDateTime.of(2017, 2, 1, 1, 1);
         Duration result = Duration.between(start, end);
         System.out.println(new StringBuffer("result: ").append(result));
-
+        System.out.println(result.toDays()); //31
+        System.out.println(result.toHours()); //744
+        System.out.println(result.toMinutes()); //44640
+        System.out.println(result.toMillis()); //2678400000
+        System.out.println(result.toNanos()); //2678400000000000
     }
 }
