@@ -307,6 +307,20 @@ public class JodaTimeImpl implements JodaTime {
         boolean f1 = d1.isAfter(d2);
         boolean f2 = d1.isBefore(d2);
         boolean f3 = d1.isEqual(d2);
+
+        //日期相差多少
+        DateTime dt4 = new DateTime("2012-05-01T00:00:00");
+        DateTime dt5 = new DateTime("2012-05-21T13:14:00");
+        Days days1 = Days.daysBetween(dt4, dt5);
+        Hours hours = Hours.hoursBetween(dt4, dt5);
+
+        //比较
+        dt4 = new DateTime("2012-05-01T00:00:00");
+        dt5 = new DateTime("2012-05-21T13:14:00");
+        Period p = new Period(dt4, dt5, PeriodType.hours());
+        System.out.println(p.getHours());
+        p = new Period(dt4, dt5, PeriodType.days());
+        System.out.println(p.getDays());
     }
 
     @Override
