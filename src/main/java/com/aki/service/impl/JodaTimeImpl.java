@@ -2,6 +2,8 @@ package com.aki.service.impl;
 
 import com.aki.service.JodaTime;
 import org.joda.time.*;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +25,21 @@ public class JodaTimeImpl implements JodaTime {
         LocalDate localDate = new LocalDate(2009, 9, 6);// September 6, 2009
         //只需要时分秒毫秒的时候
         LocalTime localTime = new LocalTime(13, 30, 26, 0);// 1:30:26PM
+
+        //某一时刻
+        Instant instant = new Instant();
+        //用于替代Calendar
+        DateTime dateTime = new DateTime();
+        //本地日期，不带时区信息
+        LocalDate localDate2 = new LocalDate();
+        //本地时间，不带时区信息
+        LocalTime localTime2 = new LocalTime();
+        //本地日期时间，不带时区信息
+        LocalDateTime localDateTime = new LocalDateTime();
+
+//        Interval：它保存了一个开始时刻和一个结束时刻，因此能够表示一段时间，并进行这段时间的相应操作
+//        Period：它保存了一段时间，比如：6个月，3天，7小时这样的概念。可以直接创建Period，或者从Interval对象构建
+//        Duration：它保存了一个精确的毫秒数。同样地，可以直接创建Duration，也可以从Interval对象构建
 
         //其他构造函数，可使用不同的构造函数快速获取DateTime对象
 //        DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour)
@@ -55,6 +72,12 @@ public class JodaTimeImpl implements JodaTime {
         int sec = dt.getSecondOfMinute();
         //毫秒
         int msec = dt.getMillisOfSecond();
+
+        DateTime nowTime = new DateTime();
+        //获取 今天的开始时间 2017-06-16 00:00:00
+        nowTime.withTimeAtStartOfDay();
+        //获取 今天的结束时间2017-06-16 23:59:59
+        nowTime.minuteOfDay().withMaximumValue();
 
         //        DateTime中的常用属性值获取方法
         //        getCenturyOfEra()               返回世纪单位(int)
@@ -288,12 +311,32 @@ public class JodaTimeImpl implements JodaTime {
 
     @Override
     public void format() {
-        DateTime dateTime = new DateTime();
+        {
+            DateTime dateTime = new DateTime();
 
-        String s1 = dateTime.toString("yyyy/MM/dd hh:mm:ss.SSSa");
-        String s2 = dateTime.toString("yyyy-MM-dd HH:mm:ss");
-        String s3 = dateTime.toString("EEEE dd MMMM, yyyy HH:mm:ssa");
-        String s4 = dateTime.toString("yyyy/MM/dd HH:mm ZZZZ");
-        String s5 = dateTime.toString("yyyy/MM/dd HH:mm Z");
+            String s1 = dateTime.toString("yyyy/MM/dd hh:mm:ss.SSSa");
+            String s2 = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+            String s3 = dateTime.toString("EEEE dd MMMM, yyyy HH:mm:ssa");
+            String s4 = dateTime.toString("yyyy/MM/dd HH:mm ZZZZ");
+            String s5 = dateTime.toString("yyyy/MM/dd HH:mm Z");
+        }
+        {
+            //String -> DateTime
+            // 方法1
+            DateTime dateTime = new DateTime("2017-6-16 15:43:50");
+            // 方法2
+            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+            dateTime = DateTime.parse("2017-6-16 23:22:45", format);
+        }
+        {
+            // DateTime -> String
+            //方法1
+            DateTime dateTime = new DateTime();
+            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+            String time = dateTime.toString(format);
+            //方法2
+            time = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+        }
+
     }
 }
